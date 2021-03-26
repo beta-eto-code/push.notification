@@ -1,0 +1,22 @@
+{
+  "name": "beta/push.notification",
+  "description": "Push notifications",
+  "type": "lib",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Nesterov",
+      "email": "alex19pov31@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Push\\": "src"
+    }
+  },
+  "require": {
+    "sly/notification-pusher": "^2.3",
+    "guzzlehttp/guzzle": "^7.3",
+    "firebase/php-jwt": "^5.2"
+  }
+}
