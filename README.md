@@ -43,6 +43,8 @@ IOSAlertOptionsMessage::init()
     ->setCategory('test')
     ->setBadge(1)
     ->setSound('bingbong.aiff', 1, 1)
+    ->setAdditionalProp('some_key', 'some_value')
+    ->setAdditionalProp('some_key_list', [1,2,3,4])
     ->loadTo($testMessage);
 
 // Отправляем уведомление на указанные устройства

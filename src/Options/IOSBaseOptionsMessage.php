@@ -42,6 +42,10 @@ abstract class IOSBaseOptionsMessage implements MessageOptionsInterface
      * @var int
      */
     private $badgeNumber;
+    /**
+     * @var array
+     */
+    private $addProps;
 
     /**
      * @param MessageInterface $message
@@ -79,6 +83,10 @@ abstract class IOSBaseOptionsMessage implements MessageOptionsInterface
 
         if (!empty($this->badgeNumber)) {
             $this->setOption($message, 'badge', $this->badgeNumber);
+        }
+
+        if (!empty($this->addProps)) {
+            $this->setOption($message, 'properties', $this->addProps);
         }
 
         $this->internalLoadOptions($message);
@@ -151,6 +159,17 @@ abstract class IOSBaseOptionsMessage implements MessageOptionsInterface
         $this->soundName = $name;
         $this->soundCritical = $critical;
         $this->soundVolume = $volume;
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param $value
+     * @return $this
+     */
+    public function setAdditionalProp(string $key, $value): self
+    {
+        $this->addProps[$key] = $value;
         return $this;
     }
 }

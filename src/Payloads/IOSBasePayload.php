@@ -47,6 +47,7 @@ abstract class IOSBasePayload implements PayloadInterface
         $targetContentId = $options['target-content-id'] ?? null;
         $sound = $options['sound'] ?? null;
         $badge = $options['badge'] ?? null;
+        $properties = $options['properties'] ?? [];
 
         $data = [];
         if (!empty($threadId)) {
@@ -73,8 +74,8 @@ abstract class IOSBasePayload implements PayloadInterface
             $data['badge'] = $badge;
         }
 
-        return [
-            'aps' => array_merge($data, $this->internalMapData($message)),
-        ];
+        $properties['aps'] = array_merge($data, $this->internalMapData($message));
+
+        return $properties;
     }
 }
