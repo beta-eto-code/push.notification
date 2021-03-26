@@ -45,19 +45,32 @@ abstract class IOSBasePayload implements PayloadInterface
         $category = $options['category'] ?? null;
         $mutableContent = $options['mutable-content'] ?? null;
         $targetContentId = $options['target-content-id'] ?? null;
+        $sound = $options['sound'] ?? null;
+        $badge = $options['badge'] ?? null;
 
         $data = [];
         if (!empty($threadId)) {
             $data['thread-id'] = $threadId;
         }
+
         if (!empty($category)) {
             $data['category'] = $category;
         }
+
         if (!empty($mutableContent)) {
             $data['mutable-content'] = $mutableContent;
         }
+
         if (!empty($targetContentId)) {
             $data['target-content-id'] = $targetContentId;
+        }
+
+        if (!empty($sound)) {
+            $data['sound'] = $sound;
+        }
+
+        if (!empty($badge)) {
+            $data['badge'] = $badge;
         }
 
         return [

@@ -26,6 +26,22 @@ abstract class IOSBaseOptionsMessage implements MessageOptionsInterface
      * @var string
      */
     private $threadId;
+    /**
+     * @var string
+     */
+    private $soundName;
+    /**
+     * @var int|null
+     */
+    private $soundCritical;
+    /**
+     * @var int|null
+     */
+    private $soundVolume;
+    /**
+     * @var int
+     */
+    private $badgeNumber;
 
     /**
      * @param MessageInterface $message
@@ -38,14 +54,31 @@ abstract class IOSBaseOptionsMessage implements MessageOptionsInterface
         if (!empty($this->category)) {
             $this->setOption($message, 'category', $this->category);
         }
+
         if (!empty($this->threadId)) {
             $this->setOption($message, 'thread-id', $this->threadId);
         }
+
         if (!empty($this->mutableContent)) {
             $this->setOption($message, 'mutableContent', $this->mutableContent);
         }
+
         if (!empty($this->targetContentId)) {
             $this->setOption($message, 'targetContentId', $this->targetContentId);
+        }
+
+        if (!empty($this->soundCritical)) {
+            $this->setOption($message, 'sound', [
+                'critical' => (int)$this->soundCritical,
+                'name' => $this->soundName,
+                'volume' => (int)$this->soundVolume,
+            ]);
+        } elseif (!empty($this->soundName)) {
+            $this->setOption($message, 'sound', $this->soundName);
+        }
+
+        if (!empty($this->badgeNumber)) {
+            $this->setOption($message, 'badge', $this->badgeNumber);
         }
 
         $this->internalLoadOptions($message);
@@ -98,6 +131,26 @@ abstract class IOSBaseOptionsMessage implements MessageOptionsInterface
     public function setTargetContentId(string $targetContentId): self
     {
         $this->targetContentId = $targetContentId;
+        return $this;
+    }
+
+    public function setBadge(int $badgeNumber): self
+    {
+        $this->badgeNumber = $badgeNumber;
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param int|null $critical
+     * @param int|null $volume
+     * @return $this
+     */
+    public function setSound(string $name, int $critical = null, int $volume = null): self
+    {
+        $this->soundName = $name;
+        $this->soundCritical = $critical;
+        $this->soundVolume = $volume;
         return $this;
     }
 }

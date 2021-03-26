@@ -41,6 +41,8 @@ $testMessage = new Message('Тестовая тема', 'Некоторое со
 IOSAlertOptionsMessage::init()
     ->setSubtitle('Подзаголовок')
     ->setCategory('test')
+    ->setBadge(1)
+    ->setSound('bingbong.aiff', 1, 1)
     ->loadTo($testMessage);
 
 // Отправляем уведомление на указанные устройства
